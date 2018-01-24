@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+<nav th:replace="fragments :: playerNav"></nav>
+
+<p th:unless="${players} and ${players.size()}">No mechanics yet</p>
+
+
+<table class="table">
+
+    <tr>
+        <th>Players</th>
+    </tr>
+
+    <tr th:each="player : ${players}">
+        <td th:text="${player.name}"></td>
+    </tr>
+
+</table>
+
+
+
+</body>
+</html>

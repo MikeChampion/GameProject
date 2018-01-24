@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+
+
+<form method="post">
+    <div th:each="mechanic : ${mechanics}" class="form-group checkbox">
+        <input type="checkbox" name="mechanicIds" th:value="${mechanic.id}" th:id="${mechanic.id}"/>
+        <label th:for="${mechanic.id}" th:text="${mechanic.name}"></label>
+        <br />
+    </div>
+
+    <input type="submit" value="Add Mechanics" />
+</form>
+
+</body>
+</html>

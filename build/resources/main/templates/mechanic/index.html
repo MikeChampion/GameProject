@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+<nav th:replace="fragments :: mechNav"></nav>
+
+<table class="table">
+
+    <tr>
+        <th>Mechanics</th>
+    </tr>
+
+    <tr th:each="mechanic : ${mechanics}">
+        <td th:text="${mechanic.name}"></td>
+    </tr>
+
+</table>
+
+<p th:unless="${mechanics} and ${mechanics.size()}">No mechanics yet</p>
+
+</body>
+</html>

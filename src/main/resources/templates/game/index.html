@@ -8,14 +8,15 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 <nav th:replace="fragments :: allGameNav"></nav>
-
+<br />
+<p th:unless="${games} and ${games.size()}">No games yet</p>
 <ul th:each="game : ${games}">
     <li>
         <a th:href="'/game/view/'+${game.id}" th:text="${game.name}"></a>
     </li>
 </ul>
 
-<p th:unless="${game} and ${games.size()}">No games yet</p>
+
 
 
 </body>

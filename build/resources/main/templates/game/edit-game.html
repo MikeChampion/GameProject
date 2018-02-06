@@ -8,13 +8,13 @@
 
 
 
-<form method="post">
-    <div th:each="mechanic : ${mechanics}" class="form-group checkbox">
+<form method="post" th:object="${form}" action="/game/edit-game">
+    <div th:each="mechanic : ${mechanics}" class="checkbox form-group">
         <input type="checkbox" name="mechanicIds" th:value="${mechanic.id}" th:id="${mechanic.id}"/>
-        <label th:for="${mechanic.id}" th:text="${mechanic.name}"></label>
+        <label th:for="${mechanicId}" th:text="${mechanic.name}"></label>
         <br />
     </div>
-    
+
     <input type="submit" value="Add Mechanics" />
 </form>
 

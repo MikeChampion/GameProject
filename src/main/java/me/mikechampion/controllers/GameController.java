@@ -1,11 +1,10 @@
 package me.mikechampion.controllers;
 
-
 import me.mikechampion.controllers.models.Game;
-import me.mikechampion.controllers.models.Mechanic;
 import me.mikechampion.controllers.models.data.GameDao;
+import me.mikechampion.controllers.models.Mechanic;
 import me.mikechampion.controllers.models.data.MechanicDao;
-import me.mikechampion.controllers.models.forms.AddGameMechForm;
+import me.mikechampion.controllers.models.forms.EditGameForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("game")
@@ -31,6 +31,7 @@ public class GameController {
         return "game/index";
     }
 
+    //Page to add a new game to list of games in database
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String add(Model model) {
         model.addAttribute("title", "Add a new game");
@@ -39,6 +40,7 @@ public class GameController {
         return "game/add";
     }
 
+    //Adds a new game to list of games in database, redirects to the edit page for that entry
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddGame(@ModelAttribute @Valid Game game, Errors errors, Model model) {
         if (errors.hasErrors()) {
@@ -49,53 +51,58 @@ public class GameController {
         return "redirect:edit-game/" + game.getId();
     }
 
+    //Displays a specific game in database
     @RequestMapping(value = "view/{gameId}", method = RequestMethod.GET)
     public String viewGame(Model model, @PathVariable int gameId) {
         Game game = gameDao.findOne(gameId);
         model.addAttribute("title", "Specific Game");
         model.addAttribute("game", game);
-
         return "game/view";
     }
 
+    //Displays the edit page for a specific game in database
     @RequestMapping(value = "edit-game/{gameId}", method = RequestMethod.GET)
     public String addItem(Model model, @PathVariable int gameId) {
         Game game = gameDao.findOne(gameId);
-        AddGameMechForm form = new AddGameMechForm(mechanicDao.findAll(), game);
+        EditGameForm form = new EditGameForm(mechanicDao.findAll(), game);
+        model.addAttribute("mechanics", mechanicDao.findAll());
         model.addAttribute("title", "Add mechanics to game: " + game.getName());
         model.addAttribute("form", form);
+
         return "game/edit-game";
     }
 
+    //TODO - fix this
+    //Submits changes to a game entry (mechanics) in the database
     @RequestMapping(value = "edit-game", method = RequestMethod.POST)
-    public String addItem(Model model, @ModelAttribute @Valid AddGameMechForm form, Errors errors) {
-        if (errors.hasErrors()) {
-            model.addAttribute("form", form);
-            return "game/edit-game";
+    public String ProcessAddItem(Model model, @ModelAttribute @Valid EditGameForm form, @RequestParam String[] mechanicIds) {
+        //model.addAttribute("form", form);
+        //model.addAttribute("mechanicIds", mechanicIds);
+        //List<String> mechanics = form.getMechanics();
+        Game gameId = gameDao.findOne(form.getGameId());
+        for (String mechId : mechanicIds) {
+            System.out.println(form.getGame());
+            System.out.println(mechId);
+            //game.addItem(mechId);
+            //gameDao.save(theGame);
         }
-
-        Mechanic theMechanic = mechanicDao.findOne(form.getMechanicId());
-        Game theGame = gameDao.findOne(form.getGameId());
-        theGame.addItem(theMechanic);
-        gameDao.save(theGame);
-        return "redirect:view/"+theGame.getId();
+        return "redirect:";
     }
 
+    //Displays a list of all games in database with checkboxes for deleting games
+    @RequestMapping(value = "remove", method = RequestMethod.GET)
+    public String displayRemoveGame(Model model) {
+        model.addAttribute("games", gameDao.findAll());
+        model.addAttribute("title", "Remove Game");
+        return "game/remove";
+    }
 
-        @RequestMapping(value = "remove", method = RequestMethod.GET)
-        public String displayRemoveGame(Model model) {
-            model.addAttribute("games", gameDao.findAll());
-            model.addAttribute("title", "Remove Game");
-            return "game/remove";
+    //Submits games for deletion
+    @RequestMapping(value = "remove", method = RequestMethod.POST)
+    public String processRemoveGame(@RequestParam int[] gameIds) {
+        for (int gameId : gameIds) {
+            gameDao.delete(gameId);
         }
-
-        @RequestMapping(value = "remove", method = RequestMethod.POST)
-        public String processRemoveGame(@RequestParam int[] gameIds) {
-
-            for (int gameId : gameIds) {
-                gameDao.delete(gameId);
-            }
-
-            return "redirect:";
-        }
+        return "redirect:";
+    }
 }

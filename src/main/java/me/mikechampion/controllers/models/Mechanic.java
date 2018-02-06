@@ -13,7 +13,7 @@ public class Mechanic {
 
     @Id
     @GeneratedValue
-    private int Id;
+    private int id;
 
     @NotNull
     @Size(min=3, max=20)
@@ -24,28 +24,19 @@ public class Mechanic {
 
     public Mechanic() { }
 
-    public Mechanic(String name) {
-        this.name = name;
-    }
+    public Mechanic(Iterable<Mechanic> all) { }
 
-    public int getId() {
-        return Id;
-    }
+    public int getId() { return id; }
 
-    public void setId(int id) {
-        this.Id = id;
-    }
+    public void setId(int id) { this.id = id; }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) { this.name = name; }
 
     public List<Game> getGames() { return games; }
 
     public void setGames(List<Game> games) { this.games = games; }
+
 
 }

@@ -1,9 +1,7 @@
 package me.mikechampion.controllers.models;
 
-import javax.persistence.ManyToMany;
-import javax.validation.constraints.NotNull;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +24,9 @@ public class Game {
 
     public Game(String name) { this.name = name; }
 
-    public void addItem(Mechanic item) { mechanics.add(item); }
-
     public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 
     public String getName() { return name; }
 
@@ -38,5 +36,7 @@ public class Game {
 
     public void setMechanics(List<Mechanic> mechanics) { this.mechanics = mechanics; }
 
-    public void addMech(Mechanic item) { mechanics.add(item); }
+    public void addItem(Mechanic item) { mechanics.add(item); }
+
+
 }

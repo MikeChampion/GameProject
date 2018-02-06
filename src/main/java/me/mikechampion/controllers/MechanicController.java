@@ -31,9 +31,9 @@ public class MechanicController {
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String add(Model model) {
-        model.addAttribute("mechanic", mechanicDao.findAll());
-        model.addAttribute(new Mechanic());
+        model.addAttribute("mechanics", mechanicDao.findAll());
         model.addAttribute("title", "Add Mechanic");
+        model.addAttribute(new Mechanic());
         return "mechanic/add";
     }
     @RequestMapping(value = "add", method = RequestMethod.POST)

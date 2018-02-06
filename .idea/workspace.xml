@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="4f80a0e1-0e35-462e-bd78-046c59f7c2a3" name="Revert: new commit" comment="" />
-    <list default="true" id="879c9dbd-5cf2-42aa-8f4c-0322b4da3e32" name="Default" comment="" />
+    <list default="true" id="879c9dbd-5cf2-42aa-8f4c-0322b4da3e32" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />

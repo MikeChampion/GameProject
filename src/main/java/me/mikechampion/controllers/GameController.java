@@ -52,6 +52,7 @@ public class GameController {
     }
 
     //Displays a specific game in database
+    //TODO mechanics aren't displaying to the game page
     @RequestMapping(value = "view/{gameId}", method = RequestMethod.GET)
     public String viewGame(Model model, @PathVariable int gameId) {
         Game game = gameDao.findOne(gameId);
@@ -72,19 +73,23 @@ public class GameController {
         return "game/edit-game";
     }
 
-    //TODO - fix this
+
     //Submits changes to a game entry (mechanics) in the database
     @RequestMapping(value = "edit-game", method = RequestMethod.POST)
-    public String ProcessAddItem(Model model, @ModelAttribute @Valid EditGameForm form, @RequestParam String[] mechanicIds) {
-        //model.addAttribute("form", form);
-        //model.addAttribute("mechanicIds", mechanicIds);
-        //List<String> mechanics = form.getMechanics();
-        Game gameId = gameDao.findOne(form.getGameId());
-        for (String mechId : mechanicIds) {
-            System.out.println(form.getGame());
-            System.out.println(mechId);
-            //game.addItem(mechId);
-            //gameDao.save(theGame);
+    public String ProcessAddItem(Model model, @ModelAttribute @Valid EditGameForm form, Errors errors, @RequestParam int[] mechanicIds) {
+        if (errors.hasErrors()) {
+            model.addAttribute("form", "form");
+            return "game/add";
+        }
+        Game game = gameDao.findOne(form.getGameId());
+        //System.out.println(game);
+
+        for  (int mechanicId : mechanicIds) {
+            //System.out.println(mechanicId);
+            Mechanic mechanic = mechanicDao.findOne(mechanicId);
+            //System.out.println(mechanic);
+            game.addItem(mechanic);
+            gameDao.save(game);
         }
         return "redirect:";
     }

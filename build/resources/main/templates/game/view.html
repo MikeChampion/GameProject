@@ -15,11 +15,12 @@
 <p><strong>Player Count</strong></p>
 
 <p><strong>Mechanics</strong></p>
+<p th:unless="${game.mechanics.size()}">no mechanics added yet</p>
 <ul>
     <li th:each="mechanic : ${mechanics}" th:text="${mechanic.name}"></li>
 </ul>
 
-<p th:unless="${game.mechanics.size()}">no mechanics added yet</p>
+
 
 
 </body>

@@ -28,6 +28,8 @@ public class EditGameForm {
 
     public void setGameId(int gameId) { this.gameId = gameId; }
 
+    public Iterable<Mechanic> getMechanic() { return mechanics; }
+
     public int getMechanicId() { return mechanicId; }
 
     public void setMechanicId(int mechanicId) { this.mechanicId = mechanicId; }

@@ -14,7 +14,7 @@
         <label th:for="${mechanicId}" th:text="${mechanic.name}"></label>
         <br />
     </div>
-
+    <input type="hidden" name="gameId" th:value="*{game.id}" />
     <input type="submit" value="Add Mechanics" />
 </form>
 

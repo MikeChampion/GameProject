@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+<nav th:replace="fragments :: allPlayerNav"></nav>
+
+<p>
+<h1 th:text="${player.name}">Default Player</h1> | <a th:href="'/player/edit-player/'+${player.id}">Edit Player</a>
+</p>
+
+
+<p><strong>Mechanics</strong></p>
+<p th:unless="${player.mechanics.size()}">no mechanics added yet</p>
+<ul>
+    <li th:each="mechanic : ${player.mechanics}" th:text="${mechanic.name}"></li>
+</ul>
+
+</body>
+</html>

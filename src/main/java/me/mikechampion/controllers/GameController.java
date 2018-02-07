@@ -52,7 +52,6 @@ public class GameController {
     }
 
     //Displays a specific game in database
-    //TODO mechanics aren't displaying to the game page
     @RequestMapping(value = "view/{gameId}", method = RequestMethod.GET)
     public String viewGame(Model model, @PathVariable int gameId) {
         Game game = gameDao.findOne(gameId);

@@ -22,8 +22,6 @@ public class Game {
 
     public Game() { }
 
-    public void addItem(Mechanic item) { mechanics.add(item); }
-
     public Game(String name) { this.name = name; }
 
     public int getId() { return id; }
@@ -34,7 +32,7 @@ public class Game {
 
     public List<Mechanic> getMechanics() { return mechanics; }
 
-    public void setMechanics(List<Mechanic> mechanics) {
-        this.mechanics = mechanics;
-    }
+    public void setMechanics(List<Mechanic> mechanics) { this.mechanics = mechanics; }
+
+    public void addItem(Mechanic item) { mechanics.add(item); }
 }

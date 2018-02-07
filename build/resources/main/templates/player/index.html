@@ -12,17 +12,11 @@
 <p th:unless="${players} and ${players.size()}">No players yet</p>
 
 
-<table class="table">
-
-    <tr>
-        <th>Players</th>
-    </tr>
-
-    <tr th:each="player : ${players}">
-        <td th:text="${player.name}"></td>
-    </tr>
-
-</table>
+<ul th:each="player : ${players}">
+    <li>
+        <a th:href="'/player/view/'+${player.id}" th:text="${player.name}"></a>
+    </li>
+</ul>
 
 
 

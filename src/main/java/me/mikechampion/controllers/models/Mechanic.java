@@ -22,6 +22,9 @@ public class Mechanic {
     @ManyToMany(mappedBy = "mechanics")
     private List<Game> games = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "mechanics")
+    private List<Player> players = new ArrayList<>();
+
     public Mechanic() { }
 
     public Mechanic(Iterable<Mechanic> all) { }

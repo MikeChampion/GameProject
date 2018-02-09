@@ -11,6 +11,7 @@
 <body>
 
 <nav th:fragment="navigation">
+    <a href="/search">Main</a> -
     <a href="/game">Games</a> |
     <a href="/mechanic">Mechanics</a> |
     <a href="/player">Players</a>
@@ -18,12 +19,6 @@
 
 <nav th:fragment="allGameNav">
     <a href="/game/add">Add Game</a> |
-    <a href="/game/remove">Remove Game</a>
-</nav>
-
-<nav th:fragment="gameNav">
-    <a href="/game/add">Add Game</a> |
-    <a href="/game/edit-game/{gameId}">Edit Game</a> |
     <a href="/game/remove">Remove Game</a>
 </nav>
 

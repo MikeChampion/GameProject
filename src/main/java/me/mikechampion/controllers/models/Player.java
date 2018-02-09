@@ -17,6 +17,8 @@ public class Player {
     @Size(min=3, max=25)
     private String name;
 
+    private String bggName;
+
     @ManyToMany
     private List<Mechanic> mechanics = new ArrayList<>();
 
@@ -35,4 +37,8 @@ public class Player {
     public void setMechanics(List<Mechanic> mechanics) { this.mechanics = mechanics; }
 
     public void addItem(Mechanic item) { mechanics.add(item); }
+
+    public String getBggName() { return bggName; }
+
+    public void setBggName(String bggName) { this.bggName = bggName; }
 }

@@ -12,6 +12,10 @@
         <input class="form-control" th:field="*{name}" />
         <span th:errors="*{name}" class="error"></span>
     </div>
+    <div class="form-group">
+        <label th:for="name">BGG Username</label>
+        <input class="form-control" th:field="*{bggName}" />
+    </div>
 
 
     <input type="submit" value="Add Player" />

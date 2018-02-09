@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -35,4 +36,5 @@ public class Game {
     public void setMechanics(List<Mechanic> mechanics) { this.mechanics = mechanics; }
 
     public void addItem(Mechanic item) { mechanics.add(item); }
+
 }

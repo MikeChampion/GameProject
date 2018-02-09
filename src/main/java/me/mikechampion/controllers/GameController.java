@@ -81,16 +81,12 @@ public class GameController {
             return "game/add";
         }
         Game game = gameDao.findOne(form.getGameId());
-        //System.out.println(game);
-
         for  (int mechanicId : mechanicIds) {
-            //System.out.println(mechanicId);
             Mechanic mechanic = mechanicDao.findOne(mechanicId);
-            //System.out.println(mechanic);
             game.addItem(mechanic);
             gameDao.save(game);
-        }
-        return "redirect:";
+            }
+        return "redirect:view/" + game.getId();
     }
 
     //Displays a list of all games in database with checkboxes for deleting games

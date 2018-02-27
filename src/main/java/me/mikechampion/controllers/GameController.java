@@ -1,9 +1,11 @@
 package me.mikechampion.controllers;
 
 import me.mikechampion.controllers.models.Game;
+import me.mikechampion.controllers.models.Player;
 import me.mikechampion.controllers.models.data.GameDao;
 import me.mikechampion.controllers.models.Mechanic;
 import me.mikechampion.controllers.models.data.MechanicDao;
+import me.mikechampion.controllers.models.data.PlayerDao;
 import me.mikechampion.controllers.models.forms.EditGameForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ public class GameController {
 
     @Autowired
     private GameDao gameDao;
+
+    @Autowired
+    private PlayerDao playerDao;
 
     @Autowired
     private MechanicDao mechanicDao;
@@ -64,18 +69,17 @@ public class GameController {
     @RequestMapping(value = "edit-game/{gameId}", method = RequestMethod.GET)
     public String addItem(Model model, @PathVariable int gameId) {
         Game game = gameDao.findOne(gameId);
-        EditGameForm form = new EditGameForm(mechanicDao.findAll(), game);
+        EditGameForm form = new EditGameForm(mechanicDao.findAll(), playerDao.findAll(), game);
         model.addAttribute("mechanics", mechanicDao.findAll());
-        model.addAttribute("title", "Add mechanics to game: " + game.getName());
+        model.addAttribute("owners", playerDao.findAll());
+        model.addAttribute("title", "Add mechanics and owner(s) to game: " + game.getName());
         model.addAttribute("form", form);
-
         return "game/edit-game";
     }
 
-
     //Submits changes to a game entry (mechanics) in the database
     @RequestMapping(value = "edit-game", method = RequestMethod.POST)
-    public String ProcessAddItem(Model model, @ModelAttribute @Valid EditGameForm form, Errors errors, @RequestParam int[] mechanicIds) {
+    public String ProcessAddItem(Model model, @ModelAttribute @Valid EditGameForm form, Errors errors, @RequestParam int[] mechanicIds, @RequestParam int[] ownerIds) {
         if (errors.hasErrors()) {
             model.addAttribute("form", "form");
             return "game/add";
@@ -83,9 +87,13 @@ public class GameController {
         Game game = gameDao.findOne(form.getGameId());
         for  (int mechanicId : mechanicIds) {
             Mechanic mechanic = mechanicDao.findOne(mechanicId);
-            game.addItem(mechanic);
-            gameDao.save(game);
+            game.addMechanicItem(mechanic);
             }
+        for  (int ownerId : ownerIds) {
+            Player owner = playerDao.findOne(ownerId);
+            game.addOwnerItem(owner);
+        }
+        gameDao.save(game);
         return "redirect:view/" + game.getId();
     }
 

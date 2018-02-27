@@ -19,9 +19,11 @@ public class Mechanic {
     @Size(min=3, max=20)
     private String name;
 
+    //linking games and mechanics
     @ManyToMany(mappedBy = "mechanics")
     private List<Game> games = new ArrayList<>();
 
+    //linking players and mechanics
     @ManyToMany(mappedBy = "mechanics")
     private List<Player> players = new ArrayList<>();
 

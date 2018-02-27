@@ -13,12 +13,16 @@
 <h1 th:text="${game.name}">Default Game</h1> | <a th:href="'/game/edit-game/'+${game.id}">Edit Game</a>
 </p>
 
-<p><strong>Player Count</strong></p>
-
 <p><strong>Mechanics</strong></p>
 <p th:unless="${game.mechanics.size()}">no mechanics added yet</p>
 <ul>
     <li th:each="mechanic : ${game.mechanics}" th:text="${mechanic.name}"></li>
+</ul>
+
+<p><strong>Owners</strong></p>
+
+<ul>
+    <li th:each="owner : ${game.owners}" th:text="${owner.name}"></li>
 </ul>
 
 </body>

@@ -62,6 +62,7 @@ public class GameController {
         Game game = gameDao.findOne(gameId);
         model.addAttribute("title", "Specific Game");
         model.addAttribute("game", game);
+        
         return "game/view";
     }
 

@@ -44,7 +44,7 @@ public class Game {
 
     public void addOwnerItem(Player item) { owners.add(item); }
 
-    public List<Player> getPlayers() { return owners; }
+    public List<Player> getOwners() { return owners; }
 
-    public void setPlayers(List<Player> owners) { this.owners = owners; }
+    public void setOwners(List<Player> owners) { this.owners = owners; }
 }

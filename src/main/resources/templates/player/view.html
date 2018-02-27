@@ -13,11 +13,16 @@
 <h1 th:text="${player.name}">Default Player</h1> | <a th:href="'/player/edit-player/'+${player.id}">Edit Player</a>
 </p>
 
-
-<p><strong>Mechanics</strong></p>
+<p><strong>Disliked Mechanics</strong></p>
 <p th:unless="${player.mechanics.size()}">no mechanics added yet</p>
 <ul>
     <li th:each="mechanic : ${player.mechanics}" th:text="${mechanic.name}"></li>
+</ul>
+
+<p><strong>Games</strong></p>
+<p th:unless="${player.games.size()}">no games added yet</p>
+<ul>
+    <li th:each="game : ${player.games}" th:text="${game.name}"></li>
 </ul>
 
 </body>

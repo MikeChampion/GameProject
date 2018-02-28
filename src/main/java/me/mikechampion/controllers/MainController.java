@@ -53,7 +53,9 @@ public class MainController {
             for mech : mechs
                 if mech not in playerMech
                 playerMech.add(mech)
+        */
 
+        /*
         gameResultLirt = ""
         ownerIds
         for owner : ownerIds
@@ -68,10 +70,7 @@ public class MainController {
                         gameResultList.add(game)
         gameResultList.random
         results = index point 0-4 from random list above
-
-
-
-         */
+        */
 
         return "index";
     }

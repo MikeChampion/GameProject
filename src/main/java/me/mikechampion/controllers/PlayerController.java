@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Query;
 import javax.validation.Valid;
+import java.util.*;
 
 @Controller
 @RequestMapping("player")
@@ -64,11 +66,15 @@ public class PlayerController {
     @RequestMapping(value = "edit-player/{playerId}", method = RequestMethod.GET)
     public String addItem(Model model, @PathVariable int playerId) {
         Player player = playerDao.findOne(playerId);
+        String pName = player.getName();
         EditPlayerForm form = new EditPlayerForm(mechanicDao.findAll(), player);
+        List pMech = player.mechanics();
+
         model.addAttribute("mechanics", mechanicDao.findAll());
+        model.addAttribute("pMech", pMech);
         model.addAttribute("title", "Add mechanics to player: " + player.getName());
         model.addAttribute("form", form);
-
+        //System.out.println(pMech);
         return "player/edit-player";
     }
 
@@ -80,16 +86,22 @@ public class PlayerController {
             model.addAttribute("form", "form");
             return "player/add";
         }
+        //player being edited
         Player player = playerDao.findOne(form.getPlayerId());
-        //System.out.println(player);
 
-        for  (int mechanicId : mechanicIds) {
-            //System.out.println(mechanicId);
+        List<Mechanic> pMechanics = new ArrayList<>(player.getMechanics());
+        for(Mechanic pMech : pMechanics) {
+                player.delItem(pMech);
+                playerDao.save(player);
+        }
+
+        for(int mechanicId : mechanicIds) {
             Mechanic mechanic = mechanicDao.findOne(mechanicId);
             //System.out.println(mechanic);
             player.addItem(mechanic);
             playerDao.save(player);
         }
+
         return "redirect:";
     }
 
@@ -103,11 +115,10 @@ public class PlayerController {
 
     //Submits players for deletion
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemovePlayer(@RequestParam int[] playerIds) {
-        for (int playerId : playerIds) {
-            playerDao.delete(playerId);
+    public String processRemovePlayer(@RequestParam int[] playerIds){
+            for (int playerId : playerIds) {
+                playerDao.delete(playerId);
+            }
+            return "redirect:";
         }
-        return "redirect:";
-    }
 }
-

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="default">
 <head th:fragment="head">
     <meta charset="UTF-8"/>
     <title th:text="${title}">Collection</title>
@@ -31,6 +34,35 @@
     <a href="/player/remove">Remove Player</a>
 </nav>
 
+<div th:fragment="owners-players">
+    <form method="post" th:object="${form}" action="output">
+        <h2>Games</h2>
+        <div th:each="owner : ${owners}" class="checkbox form-group">
+            <input type="checkbox" name="ownerIds" th:value="${owner.id}" th:id="${owner.id}"/>
+            <label th:for="${owner.id}" th:text="${owner.name}"></label>
+        </div>
+
+    <h2>Players</h2>
+    <div th:each="player : ${players}" class="checkbox">
+        <input type="checkbox" name="playerIds" th:value="${player.id}" th:id="${player.id}"/>
+        <label th:for="${player.id}" th:text="${player.name}"></label>
+        <br />
+    </div>
+    <br />
+    <input type="submit" value="Roll the Dice!!" />
+    </form>
+</div>
+
+<div th:fragment="results">
+    <h2>Results</h2>
+    <div>
+        <ul th:each="game : ${gameResultList}">
+            <li>
+                <a th:href="'/game/view/'+${game.id}" th:text="${game.name}"></a>
+            </li>
+        </ul>
+    </div>
+</div>
 
 
 </body>

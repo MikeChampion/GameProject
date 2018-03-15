@@ -2,41 +2,25 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
+
+    <link rel="stylesheet" href="/css/game.css"/>
+
     <meta charset="UTF-8"/>
     <title>Default title for my pages</title>
 
     <link rel="stylesheet" href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/webjars/bootstrap/3.3.6/css/bootstrap-theme.min.css"/>
+
 </head>
+
 <body>
-
-<h1>Games search page</h1>
-<nav th:replace="fragments :: navigation"></nav>
-
-<h2>Games</h2>
-
-<div th:each="owner : ${owners}">
-    <input type="checkbox" name="ownerIds" th:value="${owner.id}" th:id="${owner.id}"/>
-    <label th:for="${owner.id}" th:text="${owner.name}"></label>
-</div>
-
-
-<h2>Players</h2>
-<div th:each="player : ${players}" class="checkbox">
-    <input type="checkbox" name="playerIds" th:value="${player.id}" th:id="${player.id}"/>
-    <label th:for="${player.id}" th:text="${player.name}"></label>
-    <br />
-</div>
-
-<h2>Results</h2>
-<div>
-
-
-</div>
 
 <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <th:block layout:fragment="scripts"></th:block>
+
+
 </body>
 </html>

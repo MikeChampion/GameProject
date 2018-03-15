@@ -19,10 +19,12 @@ public class EditPlayerForm {
 
     public EditPlayerForm() {}
 
-    public EditPlayerForm(Iterable<Mechanic> mechanics, Player player) {
-        this.mechanics = mechanics;
+    public EditPlayerForm(Iterable<Mechanic> pMechanics, Player player) {
+        this.mechanics = pMechanics;
         this.player = player;
     }
+
+
 
     public int getPlayerId() { return playerId; }
 

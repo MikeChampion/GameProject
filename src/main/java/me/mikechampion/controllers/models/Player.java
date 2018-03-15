@@ -21,11 +21,13 @@ public class Player {
 
     //linking players and mechanics
     @ManyToMany
-    private List<Mechanic> mechanics = new ArrayList<>();
+    public List<Mechanic> mechanics = new ArrayList<>();
 
     //linking games and owners
     @ManyToMany(mappedBy = "owners")
     public List<Game> games = new ArrayList<>();
+
+
 
     public Player() { }
 
@@ -39,9 +41,12 @@ public class Player {
 
     public List<Mechanic> getMechanics() { return mechanics; }
 
+
     public void setMechanics(List<Mechanic> mechanics) { this.mechanics = mechanics; }
 
     public void addItem(Mechanic item) { mechanics.add(item); }
+
+    public void delItem(Mechanic item) { mechanics.remove(item); }
 
     public String getBggName() { return bggName; }
 
@@ -50,4 +55,6 @@ public class Player {
     public List<Game> getGames() { return games; }
 
     public void setGames(List<Game> games) { this.games = games; }
+
+    public List mechanics() { return mechanics; }
 }

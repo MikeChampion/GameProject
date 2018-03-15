@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="default">
 <head th:replace="fragments :: head"></head>
 
 <body class="container">
@@ -20,7 +23,7 @@
 </ul>
 
 <p><strong>Owners</strong></p>
-
+<p th:unless="${game.owners.size()}">no owners added yet</p>
 <ul>
     <li th:each="owner : ${game.owners}" th:text="${owner.name}"></li>
 </ul>

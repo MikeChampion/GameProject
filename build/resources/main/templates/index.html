@@ -2,16 +2,25 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="default">
-<head>
+      layout:decorate="default">
+
+<head th:replace="fragments :: head">
     <title>Gaming Menu</title>
-    <link rel="stylesheet" href="/css/game.css"/>
 </head>
-<body>
+
+<body class="container">
+<h1>Games search page</h1>
+<nav th:replace="fragments :: navigation"></nav>
+
+<div th:replace="fragments :: owners-players"></div>
 
 
-</body>
+<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <th:block layout:fragment="scripts">
     <script src="/js/hello.js"></script>
 </th:block>
+
+</body>
+
 </html>

@@ -37,12 +37,14 @@
 <div th:fragment="owners-players">
     <form method="post" th:object="${form}" action="output">
         <h2>Games</h2>
+        <p th:unless="${owners} and ${owners.size()}">No collections yet</p>
         <div th:each="owner : ${owners}" class="checkbox form-group">
             <input type="checkbox" name="ownerIds" th:value="${owner.id}" th:id="${owner.id}"/>
             <label th:for="${owner.id}" th:text="${owner.name}"></label>
         </div>
 
     <h2>Players</h2>
+    <p th:unless="${players} and ${players.size()}">No players yet</p>
     <div th:each="player : ${players}" class="checkbox">
         <input type="checkbox" name="playerIds" th:value="${player.id}" th:id="${player.id}"/>
         <label th:for="${player.id}" th:text="${player.name}"></label>

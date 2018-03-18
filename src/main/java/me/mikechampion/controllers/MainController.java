@@ -52,6 +52,35 @@ public class MainController {
         return "index";
     }
 
+    private List gameCollection(List<Player> ownerIds) {
+        ArrayList<Game> gameColl = new ArrayList<>();
+        for (Player ownerId : ownerIds) {
+            Player owner = playerDao.findOne(ownerId.getId());
+            List<Game> ownerGames = owner.getGames();
+            //System.out.println(ownerGames.size());
+            for (Game oGame : ownerGames) {
+                if (!gameColl.contains(oGame))
+                    gameColl.add(oGame);
+            }
+        }
+        return gameColl;
+    }
+
+    /*
+    private List playerCount(List<Player> playerIds) {
+        //removes games from list based on player count
+        Integer players = playerIds.size();
+
+        if (playerCount >= maxPlayers or <= minPlayer}
+        and
+        playerCount >= minPlayers
+
+                    playerMechs.add(mechanic);
+
+        return playerMechs;
+    }
+    */
+
     private List notMechanics(List<Player> playerIds) {
         //compiles player disliked mechanics into one list
         ArrayList<Mechanic> playerMechs = new ArrayList<>();
@@ -67,26 +96,31 @@ public class MainController {
         //System.out.println(playerMechs);
     }
 
-    private List gameCollection(List<Player> ownerIds) {
-        ArrayList<Game> gameColl = new ArrayList<>();
-        for (Player ownerId : ownerIds) {
-            Player owner = playerDao.findOne(ownerId.getId());
-            List<Game> ownerGames = owner.getGames();
-            //System.out.println(ownerGames.size());
-            for (Game oGame : ownerGames) {
-                if (!gameColl.contains(oGame))
-                    gameColl.add(oGame);
+    private List searchFilter(List<Game> gameColl, List<Mechanic> playerMechs) {
+        ArrayList<Game> gameResults = new ArrayList<>();
+        for (Game game : gameColl) {
+            int count = 0;
+            List<Mechanic> gameMechanics = game.getMechanics();
+            //System.out.println(gameMechanics.size());
+            for (Mechanic gMech : gameMechanics) {
+                if (playerMechs.contains(gMech))
+                    count++;
             }
+            if (count == 0)
+                gameResults.add(game);
         }
-        return gameColl;
+        return gameResults;
     }
 
     @RequestMapping(value = "output", method = RequestMethod.POST)
     public String generateResults(Model model, Game game, @RequestParam List<Player> ownerIds, @RequestParam List<Player> playerIds) {
-        List<Mechanic> playerMechs = notMechanics(playerIds);
-        //.addAttribute("playerMechs", notMechanics(playerIds));
         List<Game> gameColl = gameCollection(ownerIds);
         //model.addAttribute("gameColl", gameCollection(ownerIds));
+        
+
+        List<Mechanic> playerMechs = notMechanics(playerIds);
+        //.addAttribute("playerMechs", notMechanics(playerIds));
+
         List<Game> gameResults = searchFilter(gameColl, playerMechs);
 
         //System.out.println(curatedList.size());
@@ -101,22 +135,6 @@ public class MainController {
         model.addAttribute("gameResults", gameResults);
         //return "result";
         return "results";
-    }
-
-    private List searchFilter(List<Game> gameColl, List<Mechanic> playerMechs) {
-        ArrayList<Game> gameResults = new ArrayList<>();
-        for (Game game : gameColl) {
-            int count = 0;
-            List<Mechanic> gameMechanics = game.getMechanics();
-            //System.out.println(gameMechanics.size());
-            for (Mechanic gMech : gameMechanics) {
-                if (playerMechs.contains(gMech))
-                    count++;
-            }
-                if (count == 0)
-                    gameResults.add(game);
-        }
-        return gameResults;
     }
 
     @RequestMapping(value = "results", method = RequestMethod.GET)

@@ -65,10 +65,8 @@ public class MainController {
         }
         return gameColl;
     }
-
-    /*
-    private List playerCount(List<Player> playerIds) {
-        //removes games from list based on player count
+    private void playerCount(List<Player> playerIds) {
+/*        //removes games from list based on player count
         Integer players = playerIds.size();
 
         if (playerCount >= maxPlayers or <= minPlayer}
@@ -78,9 +76,8 @@ public class MainController {
                     playerMechs.add(mechanic);
 
         return playerMechs;
-    }
     */
-
+    }
     private List notMechanics(List<Player> playerIds) {
         //compiles player disliked mechanics into one list
         ArrayList<Mechanic> playerMechs = new ArrayList<>();
@@ -95,7 +92,6 @@ public class MainController {
         return playerMechs;
         //System.out.println(playerMechs);
     }
-
     private List searchFilter(List<Game> gameColl, List<Mechanic> playerMechs) {
         ArrayList<Game> gameResults = new ArrayList<>();
         for (Game game : gameColl) {

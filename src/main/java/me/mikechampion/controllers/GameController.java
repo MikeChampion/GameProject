@@ -14,6 +14,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -68,7 +69,7 @@ public class GameController {
 
     //Displays the edit page for a specific game in database
     @RequestMapping(value = "edit-game/{gameId}", method = RequestMethod.GET)
-    public String addItem(Model model, @PathVariable int gameId) {
+    public String editGame(Model model, @PathVariable int gameId) {
         Game game = gameDao.findOne(gameId);
         EditGameForm form = new EditGameForm(mechanicDao.findAll(), playerDao.findAll(), game);
         model.addAttribute("mechanics", mechanicDao.findAll());
@@ -80,16 +81,31 @@ public class GameController {
 
     //Submits changes to a game entry (mechanics) in the database
     @RequestMapping(value = "edit-game", method = RequestMethod.POST)
-    public String ProcessAddItem(Model model, @ModelAttribute @Valid EditGameForm form, Errors errors, @RequestParam int[] mechanicIds, @RequestParam int[] ownerIds) {
+    public String ProcessEditGame(Model model, @ModelAttribute @Valid EditGameForm form, Errors errors, @RequestParam int[] mechanicIds, @RequestParam int[] ownerIds) {
         if (errors.hasErrors()) {
             model.addAttribute("form", "form");
             return "game/add";
         }
         Game game = gameDao.findOne(form.getGameId());
+        List<Mechanic> mechanics = game.getMechanics();
+        List<Player> owners = game.getOwners();
+
+        System.out.println(mechanics);
+        System.out.println(owners);
+
+        for (Mechanic mechanic : mechanics) {
+            game.delMechanicItem(mechanic);
+        }
+
+        for (Player owner : owners) {
+            game.delOwnerItem(owner);
+        }
+
         for  (int mechanicId : mechanicIds) {
             Mechanic mechanic = mechanicDao.findOne(mechanicId);
             game.addMechanicItem(mechanic);
             }
+
         for  (int ownerId : ownerIds) {
             Player owner = playerDao.findOne(ownerId);
             game.addOwnerItem(owner);
@@ -97,6 +113,7 @@ public class GameController {
         gameDao.save(game);
         return "redirect:view/" + game.getId();
     }
+
 
     //Displays a list of all games in database with checkboxes for deleting games
     @RequestMapping(value = "remove", method = RequestMethod.GET)

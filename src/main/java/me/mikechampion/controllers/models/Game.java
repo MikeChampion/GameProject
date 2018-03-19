@@ -42,7 +42,11 @@ public class Game {
 
     public void addMechanicItem(Mechanic item) { mechanics.add(item); }
 
+    public void delMechanicItem(Mechanic item) { mechanics.remove(item); }
+
     public void addOwnerItem(Player item) { owners.add(item); }
+
+    public void delOwnerItem(Player item) { owners.remove(item); }
 
     public List<Player> getOwners() { return owners; }
 

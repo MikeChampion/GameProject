@@ -27,6 +27,7 @@
 <div>
     <h2>Games!</h2>
         <div>
+            <p th:unless="${gameResults} and ${gameResults.size()}">No results from this collection</p>
             <ul th:each="game : ${gameResults}">
                 <li>
                     <a th:href="'/game/view/'+${game.id}" th:text="${game.name}"></a>

@@ -1,8 +1,8 @@
-package me.mikechampion.controllers.models.forms;
+package me.mikechampion.GameProject.controllers.models.forms;
 
-import me.mikechampion.controllers.models.Game;
-import me.mikechampion.controllers.models.Mechanic;
-import me.mikechampion.controllers.models.Player;
+import me.mikechampion.GameProject.controllers.models.Game;
+import me.mikechampion.GameProject.controllers.models.Mechanic;
+import me.mikechampion.GameProject.controllers.models.Player;
 
 import javax.validation.constraints.NotNull;
 
@@ -14,11 +14,11 @@ public class EditGameForm {
     @NotNull
     private int mechanicId;
 
-    private Iterable<Mechanic> mechanics;
+    public Iterable<Mechanic> mechanics;
 
-    private Iterable<Player> owners;
+    public Iterable<Player> owners;
 
-    private Game game;
+    public Game game;
 
     public EditGameForm() {}
 
@@ -34,11 +34,9 @@ public class EditGameForm {
 
     public Iterable<Mechanic> getMechanic() { return mechanics; }
 
-    public int getMechanicId() { return mechanicId; }
+    //public int[] getMechanicIds() { return mechanicIds; }
 
     public void setMechanicId(int mechanicId) { this.mechanicId = mechanicId; }
-
-    public Iterable<Mechanic> getMechanics() { return mechanics; }
 
     public Game getGame() { return game; }
 

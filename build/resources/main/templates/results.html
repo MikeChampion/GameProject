@@ -3,40 +3,40 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="default">
+    <link rel="stylesheet" type="text/css" href="style.css" />
 
 <head th:replace="fragments :: head">
     <title>Gaming Menu</title>
 </head>
 
-<body class="container">
+<body id="container">
 <h1>Games results page</h1>
 <nav th:replace="fragments :: navigation"></nav>
-<div>
-    <h2>Collection(s)</h2>
-        <div th:each="owner : ${owners}">
-             <label th:for="${owner.id}" th:text="${owner.name}"></label>
-        </div>
 
-    <h2>Players</h2>
+<div id="result" class="container">
+    <div id="collections" class="col-xs-6">
+        <h2>Collection(s)</h2>
+        <div th:each="owner : ${owners}">
+            <label th:for="${owner.id}" th:text="${owner.name}"></label>
+        </div>
+    </div>
+    <div id="players" class="col-xs-6">
+        <h2>Players</h2>
         <div th:each="player : ${players}">
             <label th:for="${player.id}" th:text="${player.name}"></label>
-            <br />
         </div>
-</div>
-
-<div>
-    <h2>Games!</h2>
+    </div>
+    <div id="results">
+        <h2>Games!</h2>
         <div>
-            <p th:unless="${gameResults} and ${gameResults.size()}">No results from this collection</p>
             <ul th:each="game : ${gameResults}">
                 <li>
                     <a th:href="'/game/view/'+${game.id}" th:text="${game.name}"></a>
                 </li>
             </ul>
         </div>
+    </div>
 </div>
-
-
 
 <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>

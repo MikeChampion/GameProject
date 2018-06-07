@@ -1,0 +1,43 @@
+#container {
+    margin: auto;
+    width: 90%;
+    border: none;
+    padding: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+#navigation {
+    width: 100%
+}
+
+#search {
+    width: 100%;
+}
+
+#collections {
+    width: 50%;
+    float: left;
+}
+
+#players {
+    width: 50%;
+    float: right;
+}
+
+#button {
+    margin: auto;
+    clear: both;
+}
+
+#results {
+    clear: both;
+}
+
+.clearfix {
+    overflow: auto;
+}

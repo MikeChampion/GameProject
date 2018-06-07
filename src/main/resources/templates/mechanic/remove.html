@@ -8,20 +8,18 @@
 <body id="container">
 <h1>Games search page</h1>
 <nav th:replace="fragments :: navigation"></nav>
-<nav th:replace="fragments :: playerNav"></nav>
+<nav th:replace="fragments :: mechNav"></nav>
 
 <h2 th:text="${heading}">Default Heading</h2>
-
-
 <form method="post">
 
-    <div th:each="player : ${players}" class="checkbox">
-        <input type="checkbox" name="playerIds" th:value="${player.id}" th:id="${player.id}"/>
-        <label th:for="${player.id}" th:text="${player.name}"></label>
-        <br />
-    </div>
+    <div th:each="mechanic : ${mechanics}" class="checkbox">
+        <input type="checkbox" name="mechanicIds" th:value="${mechanic.id}" th:id="${mechanic.id}"/>
+        <label th:for="${mechanic.id}" th:text="${mechanic.name}"></label>
 
-    <input type="submit" value="Remove Players" />
+    </div>
+    <br />
+    <input type="submit" value="Remove Mechanics" />
 </form>
 
 </body>

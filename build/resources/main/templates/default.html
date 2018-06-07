@@ -3,23 +3,17 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<head>
+<head th:replace="fragments :: head">
 
-    <link rel="stylesheet" href="/css/game.css"/>
-
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
     <meta charset="UTF-8"/>
     <title>Default title for my pages</title>
-
-    <link rel="stylesheet" href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/webjars/bootstrap/3.3.6/css/bootstrap-theme.min.css"/>
 
 </head>
 
 <body>
 
-<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
-<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<th:block layout:fragment="scripts"></th:block>
+
 
 
 </body>

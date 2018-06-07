@@ -1,19 +1,18 @@
-package me.mikechampion.controllers;
+package me.mikechampion.GameProject.controllers;
 
-import me.mikechampion.controllers.models.Player;
-import me.mikechampion.controllers.models.data.PlayerDao;
-import me.mikechampion.controllers.models.Mechanic;
-import me.mikechampion.controllers.models.data.MechanicDao;
-import me.mikechampion.controllers.models.forms.EditPlayerForm;
+import me.mikechampion.GameProject.controllers.models.Mechanic;
+import me.mikechampion.GameProject.controllers.models.Player;
+import me.mikechampion.GameProject.controllers.models.data.MechanicDao;
+import me.mikechampion.GameProject.controllers.models.data.PlayerDao;
+import me.mikechampion.GameProject.controllers.models.forms.EditPlayerForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
-import javax.persistence.Query;
 import javax.validation.Valid;
 import java.util.*;
+
 
 @Controller
 @RequestMapping("player")
@@ -29,14 +28,16 @@ public class PlayerController {
     public String index(Model model) {
 
         model.addAttribute("players", playerDao.findAll());
-        model.addAttribute("title", "Players");
+        model.addAttribute("heading", "Players");
+        model.addAttribute("title", "Game Menu");
         return "player/index";
         }
 
     //Page to add a new player to list of players in database
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String add(Model model) {
-        model.addAttribute("title", "Add a new player");
+        model.addAttribute("heading", "Add Player");
+        model.addAttribute("title", "Game Menu");
         model.addAttribute("name", "Add player");
         model.addAttribute(new Player());
         return "player/add";
@@ -57,22 +58,26 @@ public class PlayerController {
     @RequestMapping(value = "view/{playerId}", method = RequestMethod.GET)
     public String viewPlayer(Model model, @PathVariable int playerId) {
         Player player = playerDao.findOne(playerId);
-        model.addAttribute("title", "Specific Player");
+        model.addAttribute("title", "Game Menu");
         model.addAttribute("player", player);
+
         return "player/view";
     }
 
     //Displays the edit page for a specific player in database
     @RequestMapping(value = "edit-player/{playerId}", method = RequestMethod.GET)
-    public String addItem(Model model, @PathVariable int playerId) {
+    public String editPlayer(Model model, @PathVariable int playerId) {
         Player player = playerDao.findOne(playerId);
-        String pName = player.getName();
+        List ePlayerMech = player.mechanics();
+        String name = "";
         EditPlayerForm form = new EditPlayerForm(mechanicDao.findAll(), player);
-        List pMech = player.mechanics();
 
+
+        model.addAttribute("player", player);
         model.addAttribute("mechanics", mechanicDao.findAll());
-        model.addAttribute("pMech", pMech);
-        model.addAttribute("title", "Add mechanics to player: " + player.getName());
+        model.addAttribute("ePlayerMech", ePlayerMech);
+        model.addAttribute("title", "Edit player: " + player.getName());
+
         model.addAttribute("form", form);
         //System.out.println(pMech);
         return "player/edit-player";
@@ -81,24 +86,42 @@ public class PlayerController {
 
     //Submits changes to a player entry (mechanics) in the database
     @RequestMapping(value = "edit-player", method = RequestMethod.POST)
-    public String ProcessAddItem(Model model, @ModelAttribute @Valid EditPlayerForm form, Errors errors, @RequestParam int[] mechanicIds) {
+    public String editPlayer(Model model, @ModelAttribute @Valid EditPlayerForm form, Errors errors, @RequestParam int[] mechanicIds) {
         if (errors.hasErrors()) {
             model.addAttribute("form", "form");
             return "player/add";
         }
         //player being edited
         Player player = playerDao.findOne(form.getPlayerId());
+        int playerId = form.getPlayerId();
+        String pName = player.getName();
+        String name = form.getName();
+        Player update = new Player();
+        //int[] mechanicIds = form.getMechanicIds();
+
+/*
+//TODO 2.1 add ability to edit player name HIBERNATE SESSIONFACTORY tutorial
+        SessionFactory sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        update = (Player) session.get(Player.class, playerId);
+        update.setName(nName);
+        session.update(update);
+        session.getTransaction().commit();
+        session.close();
+*/
+//TODO 2.2 copy 'edit player name' to implement 'edit bggName'
 
         List<Mechanic> pMechanics = new ArrayList<>(player.getMechanics());
         for(Mechanic pMech : pMechanics) {
-                player.delItem(pMech);
+                player.delMechItem(pMech);
                 playerDao.save(player);
         }
 
         for(int mechanicId : mechanicIds) {
             Mechanic mechanic = mechanicDao.findOne(mechanicId);
-            //System.out.println(mechanic);
-            player.addItem(mechanic);
+            player.addMechItem(mechanic);
             playerDao.save(player);
         }
 
@@ -109,7 +132,8 @@ public class PlayerController {
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemovePlayer(Model model) {
         model.addAttribute("players", playerDao.findAll());
-        model.addAttribute("title", "Remove Player");
+        model.addAttribute("heading", "Remove Player");
+        model.addAttribute("title", "Game Menu");
         return "player/remove";
     }
 

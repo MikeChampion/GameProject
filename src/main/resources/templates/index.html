@@ -4,22 +4,18 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="default">
 
+
 <head th:replace="fragments :: head">
     <title>Gaming Menu</title>
 </head>
 
-<body class="container">
+<body id="container">
 <h1>Games search page</h1>
 <nav th:replace="fragments :: navigation"></nav>
+<br />
 
-<div th:replace="fragments :: owners-players"></div>
+<div th:replace="fragments :: search"></div>
 
-
-<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
-<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<th:block layout:fragment="scripts">
-    <script src="/js/hello.js"></script>
-</th:block>
 
 </body>
 

@@ -8,13 +8,13 @@
 
 </head>
 
-<body class="container">
-<h1 th:text="${title}">Default Title</h1>
-
-
+<body id="container">
+<h1>Games search page</h1>
 <nav th:replace="fragments :: navigation"></nav>
-<nav th:replace="fragments :: allGameNav"></nav>
-<br />
+<nav th:replace="fragments :: gameNav"></nav>
+<h2 th:text="${heading}">Default Heading</h2>
+
+
 <p th:unless="${games} and ${games.size()}">No games yet</p>
 <ul th:each="game : ${games}">
     <li>

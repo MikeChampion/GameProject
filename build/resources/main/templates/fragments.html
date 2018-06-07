@@ -3,36 +3,39 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="default">
+
 <head th:fragment="head">
     <meta charset="UTF-8"/>
     <title th:text="${title}">Collection</title>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
+
 <body>
 
-<nav th:fragment="navigation">
+<div th:fragment="navigation" id="navigation">
     <a href="/">Main</a> -
     <a href="/game">Games</a> |
     <a href="/mechanic">Mechanics</a> |
     <a href="/player">Players</a>
-</nav>
 
-<nav th:fragment="allGameNav">
+</div>
+
+<nav th:fragment="gameNav">
     <a href="/game/add">Add Game</a> |
     <a href="/game/remove">Remove Game</a>
 </nav>
 
 <nav th:fragment="mechNav">
-    <a href="/mechanic/add">Add Mechanic</a>
+    <a href="/mechanic/add">Add Mechanic</a> |
+    <a href="/mechanic/remove">Remove Mechanic</a>
 </nav>
 
 <nav th:fragment="playerNav">
     <a href="/player/add">Add Player</a> |
     <a href="/player/remove">Remove Player</a>
 </nav>
+
+
 
 <div th:fragment="owners-players">
     <form method="post" th:object="${form}" action="output">
@@ -55,16 +58,36 @@
     </form>
 </div>
 
-<div th:fragment="results">
-    <h2>Results</h2>
-    <div>
-        <ul th:each="game : ${gameResultList}">
-            <li>
-                <a th:href="'/game/view/'+${game.id}" th:text="${game.name}"></a>
-            </li>
-        </ul>
+<div th:fragment="search" id="search" class="container">
+    <form method="post" th:object="${form}" action="output">
+        <div id="collections" class="col-xs-6">
+            <h2>Collection(s)</h2>
+            <p th:unless="${owners} and ${owners.size()}">No collections yet</p>
+            <div th:each="owner : ${owners}" class="checkbox form-group">
+                <input type="checkbox" name="ownerIds" th:value="${owner.id}" th:id="${owner.id}"/>
+                <label th:for="${owner.id}" th:text="${owner.name}"></label>
+            </div>
+        </div>
+        <div id="players" class="col-xs-6">
+            <h2>Players</h2>
+            <p th:unless="${players} and ${players.size()}">No players yet</p>
+            <div th:each="player : ${players}" class="checkbox">
+                <input type="checkbox" name="playerIds" th:value="${player.id}" th:id="${player.id}"/>
+                <label th:for="${player.id}" th:text="${player.name}"></label>
+            </div>
+        </div>
+        <div id="button"><input type="submit" value="Roll the Dice!!" /></div>
+    </form>
+    <div id="results">
+        <h2>Games!</h2>
+        <div>
+            <p>Check the collection(s) to search through and the players who will be attending.
+            <br />Once the sort is complete your choices will be here.
+            </p>
+        </div>
     </div>
 </div>
+
 
 
 </body>

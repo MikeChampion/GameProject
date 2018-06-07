@@ -1,7 +1,7 @@
-package me.mikechampion.controllers.models.forms;
+package me.mikechampion.GameProject.controllers.models.forms;
 
-import me.mikechampion.controllers.models.Player;
-import me.mikechampion.controllers.models.Mechanic;
+import me.mikechampion.GameProject.controllers.models.Mechanic;
+import me.mikechampion.GameProject.controllers.models.Player;
 
 import javax.validation.constraints.NotNull;
 
@@ -17,12 +17,22 @@ public class EditPlayerForm {
 
     private Player player;
 
+    private String name;
+
     public EditPlayerForm() {}
 
     public EditPlayerForm(Iterable<Mechanic> pMechanics, Player player) {
         this.mechanics = pMechanics;
         this.player = player;
     }
+
+    public void setMechanics(Iterable<Mechanic> mechanics) { this.mechanics = mechanics; }
+
+    public void setPlayer(Player player) { this.player = player; }
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
 
     public int getPlayerId() { return playerId; }
 
@@ -37,4 +47,6 @@ public class EditPlayerForm {
     public Iterable<Mechanic> getMechanics() { return mechanics; }
 
     public Player getPlayer() { return player; }
+
+
 }

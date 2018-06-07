@@ -9,3 +9,5 @@ This app will allow the user to access a Players (their own or an opponenets) ga
 * Theme
 * Mechanics
 
+This is v1 of this project, strictly Java, HTML and CSS.
+All the filtering, add / delete of games, players and mechanics works. It is not as pretty as is could be, but it is functional. 

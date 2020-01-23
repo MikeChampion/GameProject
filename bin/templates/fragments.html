@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="default">
+
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <title th:text="${title}">Collection</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+
+<div th:fragment="navigation" id="navigation">
+    <a href="/">Main</a> -
+    <a href="/game">Games</a> |
+    <a href="/mechanic">Mechanics</a> |
+    <a href="/player">Players</a>
+
+</div>
+
+<nav th:fragment="gameNav">
+    <a href="/game/add">Add Game</a> |
+    <a href="/game/remove">Remove Game</a>
+</nav>
+
+<nav th:fragment="viewGameNav">
+    <a href="/game/add">Add Game</a> |
+    <a href="/game/remove">Remove Game</a> |
+    <a th:href="'/game/edit-game/'+${game.id}">Edit Game</a>
+</nav>
+
+<nav th:fragment="mechNav">
+    <a href="/mechanic/add">Add Mechanic</a> |
+    <a href="/mechanic/remove">Remove Mechanic</a>
+</nav>
+
+<nav th:fragment="playerNav">
+    <a href="/player/add">Add Player</a> |
+    <a href="/player/remove">Remove Player</a>
+</nav>
+
+<nav th:fragment="viewPlayerNav">
+    <a href="/player/add">Add Player</a> |
+    <a href="/player/remove">Remove Player</a> |
+    <a th:href="'/player/edit-player/'+${player.id}">Edit Player</a>
+</nav>
+
+<div th:fragment="search" id="search" class="container">
+    <form method="post" th:object="${form}" action="output">
+        <div id="collections" class="col-lg-6">
+            <h2>Collection(s)</h2>
+            <p th:unless="${owners} and ${owners.size()}">No collections yet</p>
+            <div th:each="owner : ${owners}" class="checkbox form-group">
+                <input type="checkbox" name="ownerIds" th:value="${owner.id}" th:id="${owner.id}"/>
+                <label th:for="${owner.id}" th:text="${owner.name}"></label>
+            </div>
+        </div>
+        <div id="players" class="col-lg-6">
+            <h2>Players</h2>
+            <p th:unless="${players} and ${players.size()}">No players yet</p>
+            <div th:each="player : ${players}" class="checkbox">
+                <input type="checkbox" name="playerIds" th:value="${player.id}" th:id="${player.id}"/>
+                <label th:for="${player.id}" th:text="${player.name}"></label>
+            </div>
+        </div>
+        <div id="button"><input type="submit" value="Roll the Dice!!" /></div>
+    </form>
+    <div id="results">
+        <h2>Games!</h2>
+        <div>
+            <p>Check the collection(s) to search through and the players who will be attending.
+            <br />Once the sort is complete your selections will be here.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="finalSort" id="finalSort" class="container">
+    <div id="endColl" class="col-lg-6">
+        <h2>Collection(s)</h2>
+        <p th:unless="${owners} and ${owners.size()}">No collections yet</p>
+        <div th:each="owner : ${owners}">
+            <ul>
+                <li>
+                    <a th:href="'/player/view/'+${owner.id}" th:text="${owner.name}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="endPlayers" class="col-lg-6">
+        <h2>Players</h2>
+        <p th:unless="${players} and ${players.size()}">No players yet</p>
+        <div th:each="player : ${players}">
+            <ul>
+                <li>
+                    <a th:href="'/player/view/'+${player.id}" th:text="${player.name}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="results">
+        <h2>Games!</h2>
+        <div>
+            <p th:unless="${gameResults} and ${gameResults.size()}">No games match search parameters</p>
+            <ul th:each="game : ${gameResults}">
+                <li>
+                    <a th:href="'/game/view/'+${game.id}" th:text="${game.name}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="playerView" id="playerView" class="container">
+    <div id="disMechs" class="col-lg-6">
+        <h3>Disliked Mechanics</h3>
+        <p th:unless="${player.mechanics.size()}">no mechanics added yet</p>
+        <ul>
+            <li th:each="mechanic : ${player.mechanics}" th:text="${mechanic.name}"></li>
+        </ul>
+    </div>
+    <div id="ownedGames" class="col-lg-6">
+        <h3>Owned Games</h3>
+        <p th:unless="${player.games.size()}">no games added yet</p>
+        <ul>
+            <li th:each="game : ${player.games}">
+                <a th:href="'/game/view/'+${game.id}" th:text="${game.name}"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div th:fragment="gameView" id="gameView" class="container">
+    <div id="gameMechs" class="col-lg-6">
+        <h3>Mechanics</h3>
+        <p th:unless="${game.mechanics.size()}">no mechanics added yet</p>
+        <ul>
+            <li th:each="mechanic : ${game.mechanics}" th:text="${mechanic.name}"></li>
+        </ul>
+    </div>
+    <div id="gameOwners" class="col-lg-6">
+        <h3>Owners</h3>
+        <p th:unless="${game.owners.size()}">no owners added yet</p>
+        <ul>
+            <li th:each="owner : ${game.owners}">
+                <a th:href="'/player/view/'+${owner.id}" th:text="${owner.name}"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+</body>
+</html>

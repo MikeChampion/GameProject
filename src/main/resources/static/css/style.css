@@ -20,12 +20,52 @@ ul {
 }
 
 #collections {
-    width: 50%;
+    width: 25%;
     float: left;
 }
 
 #players {
-    width: 50%;
+    width: 75%;
+    float: right;
+}
+
+#disMechs {
+    width: 25%;
+    float: left;
+}
+
+#ownedGames {
+    width: 75%;
+    float: right;
+}
+
+#gameMechs {
+    width: 25%;
+    float: left;
+}
+
+#gameOwners {
+    width: 75%;
+    float: right;
+}
+
+#endColl {
+    width: 25%;
+    float: left;
+}
+
+#endPlayers {
+    width: 75%;
+    float: right;
+}
+
+#editLeft {
+    width: 25%;
+    float: left;
+}
+
+#editRight {
+    width: 75%;
     float: right;
 }
 
@@ -34,7 +74,7 @@ ul {
     clear: both;
 }
 
-#results {
+.results {
     clear: both;
 }
 

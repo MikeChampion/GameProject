@@ -62,7 +62,6 @@ public class MainController {
     */
     }
 
-
     private List gameCollection(List<Player> ownerIds) {
         ArrayList<Game> gameColl = new ArrayList<>();
         for (Player ownerId : ownerIds) {
@@ -76,7 +75,6 @@ public class MainController {
         }
         return gameColl;
     }
-
 
     private List notMechanics(List<Player> playerIds) {
         //compiles player disliked mechanics into one list
@@ -117,12 +115,14 @@ public class MainController {
         model.addAttribute("title", "Results Page");
         model.addAttribute("gameResults", gameResults);
 
-        return "results";
+        return "result";
     }
-
+/*
     @RequestMapping(value = "result", method = RequestMethod.GET)
     public String displayResults(Model model, Game game, @RequestParam List<Player> ownerIds, @RequestParam List<Player> playerIds, @RequestParam List<Mechanic> playerMechs, @RequestParam List<Game> gameColl) {
         searchFilter(gameColl, playerMechs);
         return "results";
     }
+*/
+
 }

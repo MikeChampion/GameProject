@@ -4,6 +4,8 @@
     <bytecodeTargetLevel>
       <module name="GameProject_main" target="1.8" />
       <module name="GameProject_test" target="1.8" />
+      <module name="GameProject_v1_main" target="1.8" />
+      <module name="GameProject_v1_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

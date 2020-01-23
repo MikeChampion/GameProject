@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - GameProjectApplication",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "me.mikechampion.GameProject.GameProjectApplication",
+            "args": "",
+            "projectName": "GameProject v1"
+        }
+    ]
+}

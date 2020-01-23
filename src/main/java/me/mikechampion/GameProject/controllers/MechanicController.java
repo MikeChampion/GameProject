@@ -41,7 +41,7 @@ public class MechanicController {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String add(Model model, @ModelAttribute @Valid Mechanic mechanic, Errors errors) {
         if (errors.hasErrors()) {
-            model.addAttribute("heading", "Add Category");
+            model.addAttribute("heading", "Add Mechanic");
             return "mechanic/add";
         }
         mechanicDao.save(mechanic);

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="default">
+<head th:replace="fragments :: head"></head>
+
+<body id="container">
+<h1>Games search page</h1>
+<nav th:replace="fragments :: navigation"></nav>
+<nav th:replace="fragments :: gameNav"></nav>
+<h2 th:text="${heading}">Default Heading</h2>
+
+<form method="post">
+
+    <div th:each="game : ${games}" class="checkbox">
+        <input type="checkbox" name="gameIds" th:value="${game.id}" th:id="${game.id}"/>
+        <label th:for="${game.id}" th:text="${game.name}"></label>
+        <br />
+    </div>
+
+    <input type="submit" value="Remove Games" />
+</form>
+
+</body>
+</html>

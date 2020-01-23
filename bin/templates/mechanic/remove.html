@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="default">
+<head th:replace="fragments :: head"></head>
+
+<body id="container">
+<h1>Games search page</h1>
+<nav th:replace="fragments :: navigation"></nav>
+<nav th:replace="fragments :: mechNav"></nav>
+
+<h2 th:text="${heading}">Default Heading</h2>
+<form method="post">
+
+    <div th:each="mechanic : ${mechanics}" class="checkbox">
+        <input type="checkbox" name="mechanicIds" th:value="${mechanic.id}" th:id="${mechanic.id}"/>
+        <label th:for="${mechanic.id}" th:text="${mechanic.name}"></label>
+
+    </div>
+    <br />
+    <input type="submit" value="Remove Mechanics" />
+</form>
+
+</body>
+</html>

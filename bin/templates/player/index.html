@@ -8,15 +8,23 @@
 <body id="container">
 <h1>Games search page</h1>
 <nav th:replace="fragments :: navigation"></nav>
-<nav th:replace="fragments :: viewPlayerNav"></nav>
+<nav th:replace="fragments :: playerNav"></nav>
+
+
+<h2 th:text="${heading}">Default Heading</h2>
 
 
 
-<h2 th:inline="text">
-    <span th:text="${player.name}" th:remove="tag">Default Name</span> -
-    <small th:text="${player.bggName}">Default bggName</small></h2>
+<p th:unless="${players} and ${players.size()}">No players yet</p>
 
-<div th:replace="fragments :: playerView"></div>
+
+<ul th:each="player : ${players}">
+    <li>
+        <a th:href="'/player/view/'+${player.id}" th:text="${player.name}"></a>
+    </li>
+</ul>
+
+
 
 </body>
 </html>

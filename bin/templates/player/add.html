@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="default">
+<head th:replace="fragments :: head"></head>
+
+<body id="container">
+<h1>Games search page</h1>
+<nav th:replace="fragments :: navigation"></nav>
+<nav th:replace="fragments :: playerNav"></nav>
+
+<h2 th:text="${heading}">Default Heading</h2>
+
+
+<form method="post" style="max-width:600px;" th:object="${player}">
+    <div class="form-group">
+        <label th:for="name">Name</label>
+        <input class="form-control" th:field="*{name}" />
+        <span th:errors="*{name}" class="error"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <label th:for="name">BGG Username</label>
+        <input class="form-control" th:field="*{bggName}" />
+    </div>
+
+    <br />
+    <input type="submit" value="Add Player" />
+
+</form>
+
+</body>
+</html>

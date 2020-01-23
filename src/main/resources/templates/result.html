@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="default">
+
+
+<head th:replace="fragments :: head">
+    <title>Gaming Menu</title>
+</head>
+
+<body id="container">
+<h1>Games search page</h1>
+<nav th:replace="fragments :: navigation"></nav>
+<br />
+
+<div th:replace="fragments :: finalSort"></div>
+
+
+</body>
+
+</html>

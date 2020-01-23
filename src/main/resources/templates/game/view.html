@@ -8,22 +8,14 @@
 <body id="container">
 <h1>Games search page</h1>
 <nav th:replace="fragments :: navigation"></nav>
-<nav th:replace="fragments :: gameNav"></nav>
+<nav th:replace="fragments :: viewGameNav"></nav>
 <h2 th:text="${heading}">Default Heading</h2>
 
-<h1 th:text="${game.name}">Default Game</h1> | <a th:href="'/game/edit-game/'+${game.id}">Edit Game</a>
+<h2 th:text="${game.name}">Default Game</h2>
 
-<p><strong>Mechanics</strong></p>
-<p th:unless="${game.mechanics.size()}">no mechanics added yet</p>
-<ul>
-    <li th:each="mechanic : ${game.mechanics}" th:text="${mechanic.name}"></li>
-</ul>
+<div th:replace="fragments :: gameView"></div>
 
-<p><strong>Owners</strong></p>
-<p th:unless="${game.owners.size()}">no owners added yet</p>
-<ul>
-    <li th:each="owner : ${game.owners}" th:text="${owner.name}"></li>
-</ul>
+
 
 </body>
 </html>

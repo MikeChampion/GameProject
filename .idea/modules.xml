@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GameProject.iml" filepath="$PROJECT_DIR$/.idea/modules/GameProject.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GameProject_main.iml" filepath="$PROJECT_DIR$/.idea/modules/GameProject_main.iml" group="GameProject" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GameProject_test.iml" filepath="$PROJECT_DIR$/.idea/modules/GameProject_test.iml" group="GameProject" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GameProject_v1.iml" filepath="$PROJECT_DIR$/.idea/modules/GameProject_v1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GameProject_v1_main.iml" filepath="$PROJECT_DIR$/.idea/modules/GameProject_v1_main.iml" group="GameProject_v1" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GameProject_v1_test.iml" filepath="$PROJECT_DIR$/.idea/modules/GameProject_v1_test.iml" group="GameProject_v1" />
       <module fileurl="file://$PROJECT_DIR$/src/main/main.iml" filepath="$PROJECT_DIR$/src/main/main.iml" />
       <module fileurl="file://$PROJECT_DIR$/src/test/test.iml" filepath="$PROJECT_DIR$/src/test/test.iml" />
     </modules>
